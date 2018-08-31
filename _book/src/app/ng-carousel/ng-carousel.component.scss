@@ -1,0 +1,92 @@
+:host {
+    #calousel-box {
+        border: 1px solid red;
+        height: 350px;
+        width: 900px;
+         overflow: hidden;
+        .calousel-container {
+            width: 100%;
+            height: 100%;
+            border:2px solid red;
+            position: relative;
+            .ng-carousel-item {
+                position: absolute;
+                cursor: pointer;
+                left: 0px;
+                width: 33.3%;
+                max-height: 60%;
+                transition: all .5s ease-out;
+                flex: 0 0 auto;
+                z-index: 10;
+                overflow: hidden;
+                box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, .4);
+                img {
+                    width: 100%;
+                }
+            }
+            .bt_index_array{
+                position: absolute;
+                width: 100%;
+                bottom: 10px;
+                z-index: 50 !important;
+                span{
+                    display: block;
+                    width: 5px;
+                    border-radius: 10px;
+                    border:3px solid red;
+                    transition: width 1s ease;
+                    &.selected{
+                        width:15px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@for $i from 1 through 8 {
+    .p#{$i} {
+        @if $i==3 {
+            z-index: 30 !important;
+            width: 50% !important;
+            transform: translateX(50%) !important;
+        }
+        @else {
+            @if $i==2 {
+                z-index: 15 !important;
+            }
+            @if $i==4 {
+                z-index: 20 !important;
+            }
+           transform: translateX((100%*(($i)-2))) !important;
+        }
+    }
+}
+
+@for $i from 1 through 4 {
+    .s#{$i} {
+        @if $i==2 {
+            z-index: 30 !important;
+            width: 50% !important;
+            transform: translateX(50%) !important;
+        }
+        @else {
+            @if $i==1 {
+                z-index: 15 !important;
+            }
+            @if $i==3 {
+                z-index: 20 !important;
+            }
+
+            @if $i==4 {
+                transform: translateX(100%) !important;
+            }
+            @else{
+                transform: translateX((100%*(($i)-1))) !important;
+            }
+           
+        }
+    }
+
+}
+
