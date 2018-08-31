@@ -1,6 +1,6 @@
 {
-  "name": "carousel",
-  "version": "0.0.0",
+  "name": "ngx-carousel",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,6 +24,7 @@
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
     "rxjs": "^6.0.0",
+    "user": "0.0.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
