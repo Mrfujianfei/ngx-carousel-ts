@@ -1,5 +1,5 @@
 # ng-carousel
-基于angular6.0+的图片轮播组件。
+基于angular的图片轮播组件。
 
 
 ## 简介
