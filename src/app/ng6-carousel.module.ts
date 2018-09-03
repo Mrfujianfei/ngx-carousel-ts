@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
-import { NgCarouselComponent } from './app/ng-carousel/ng-carousel.component';
+import { NgCarouselComponent } from './ng-carousel/ng-carousel.component';
 
 @NgModule({
     imports: [
