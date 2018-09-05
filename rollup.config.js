@@ -1,5 +1,5 @@
 export default {
-  input: 'dist/index.js',
+  input: 'dist/carousel/main.js',
   output: {
     file: 'bundles/ng6-carousel.umd.js',
     format: 'umd'
