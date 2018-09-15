@@ -15,10 +15,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
-  },
-  "files": [ "./index.ts" ],
-  "exclude": [ 
-    "node_modules"
-  ]
+    ],
+    "paths": {
+      "ngx-carousel-ts": [
+        "dist/ngx-carousel-ts"
+      ],
+      "ngx-carousel-ts/*": [
+        "dist/ngx-carousel-ts/*"
+      ]
+    }
+  }
 }
