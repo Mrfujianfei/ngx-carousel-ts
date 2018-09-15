@@ -1,0 +1,24 @@
+# folders to ignore
+/src
+/node_modules
+/e2e
+/ngCarouselModule
+
+# ignore typescript files
+*.component.ts
+*.service.ts
+*.module.ts
+index.ts
+
+# ignore tsconfig.json and tslint other
+tsconfig.json
+tslint.json
+protractor.conf.js
+karma.conf.js
+.gitignore
+.editorconfig
+.angular-cli.json
+angular.json
+SUMMARY.md
+
+

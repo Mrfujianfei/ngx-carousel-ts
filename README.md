@@ -12,12 +12,17 @@
 
 // 这里是安装和下载
 
-- `npm i ng6-carousel`
+- `npm i ngx-carousel-ts`
 
 
 
 ## 快速使用
 
+- `import { NgxCarouselTsModule } from 'ngx-carousel-ts';`
+
+appmodule里面引入
+
+- `imports: [ NgxCarouselTsModule ]`
 
 - [使用文档](./doc/use/README.md)
 

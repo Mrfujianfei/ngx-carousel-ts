@@ -4,7 +4,7 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "declaration": false,
+    "declaration": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -15,6 +15,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-carousel-ts": [
+        "dist/ngx-carousel-ts"
+      ],
+      "ngx-carousel-ts/*": [
+        "dist/ngx-carousel-ts/*"
+      ]
+    }
   }
 }

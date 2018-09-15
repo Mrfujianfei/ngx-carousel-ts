@@ -33,10 +33,12 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -117,6 +119,46 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-carousel-ts": {
+      "root": "projects/ngx-carousel-ts",
+      "sourceRoot": "projects/ngx-carousel-ts/src",
+      "projectType": "library",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-carousel-ts/tsconfig.lib.json",
+            "project": "projects/ngx-carousel-ts/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngx-carousel-ts/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-carousel-ts/src/test.ts",
+            "tsConfig": "projects/ngx-carousel-ts/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-carousel-ts/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-carousel-ts/tsconfig.lib.json",
+              "projects/ngx-carousel-ts/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
