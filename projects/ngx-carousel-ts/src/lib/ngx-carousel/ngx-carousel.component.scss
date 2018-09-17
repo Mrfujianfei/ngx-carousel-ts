@@ -1,27 +1,44 @@
 @import '../index';
+@import '../../assets/icons/iconfont.css';
 :host {
     #calousel-box {
-        border: 1px solid red;
         height: 350px;
         width: 900px;
         overflow: hidden;
+        position: relative;
+        &>a {
+            position: absolute;
+            z-index: 1000;
+            margin-top: -30px;
+            i{
+                font-size: 60px;
+                color: #6bd5e1;
+            }
+            &:nth-of-type(1) {
+                top: 50%;
+                left: -5px;
+            }
+            &:nth-of-type(2) {
+                top: 50%;
+                right: -5px;
+            }
+        }
         .calousel-container {
             width: 100%;
             height: 100%;
-            border: 2px solid red;
             position: relative;
             .ng-carousel-item {
                 position: absolute;
                 cursor: pointer;
                 left: 0px;
                 width: 33.3%;
-                max-height: 65%;
+                height: 85%;
                 transition: all .5s ease-out;
                 flex: 0 0 auto;
                 z-index: 10;
-                overflow: hidden;
-                box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, .4);
+                overflow: hidden; // box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, .4);
                 img {
+                    height: 100%;
                     width: 100%;
                 }
             }
@@ -32,12 +49,13 @@
                 z-index: 50 !important;
                 span {
                     display: block;
-                    width: 5px;
-                    border-radius: 10px;
-                    border: 3px solid red;
+                    width: 20px;
+                    height: 4px;
+                    border-radius: 5px;
+                    background: #ecf4f3;
                     transition: width 1s ease;
                     &.selected {
-                        width: 15px;
+                        background: #6bd5e1;
                     }
                 }
             }
@@ -50,6 +68,7 @@
         @if $i==3 {
             z-index: 30 !important;
             width: 50% !important;
+            height: 100% !important;
             transform: translateX(50%) !important;
         }
         @else {

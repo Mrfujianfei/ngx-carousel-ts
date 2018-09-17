@@ -14,14 +14,46 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
   selectedIndex = 0;
   _listenClick = [];
   _setTimeout = null;
-  calousel_width = 900;
-  calousel_height = 350;
+  calousel_width = 900; // 容器宽
+  calousel_height = 250; // 容器高
+  itemAlign = 'center'; // 'center' 'end' 'start'
   item_doms = [];
   item_doms_bt = [];
   item_doms_length = 0;
   class_now_array = [];
   class_before_array = [];
   @Input() Images: any = [];
+
+  @Input()
+  set width(value: number) {
+    this.calousel_width = value;
+  }
+
+  get width() {
+    return this.calousel_width;
+  }
+
+  @Input()
+  set height(value: number) {
+    this.calousel_height = value;
+  }
+
+  get height() {
+    return this.calousel_height;
+  }
+
+
+  @Input()
+  set fmAlign(value: string) {
+    if (value === 'center' || value === 'end' || value === 'start') {
+      this.itemAlign = value === 'center' ? value : 'flex-' + value;
+    }
+  }
+
+  get fmAlign() {
+    return this.itemAlign;
+  }
+
   @ViewChild('calouselcontainer') _container: ElementRef;
   constructor(
     private render: Renderer2,

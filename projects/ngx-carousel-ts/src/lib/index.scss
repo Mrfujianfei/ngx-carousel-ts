@@ -1,8 +1,14 @@
-.flex-row-start-center {
+$textAlign-List:'center' 'left' 'right';
+@each $textTyle in $textAlign-List {
+    .text-#{$textTyle} {
+        text-align: #{$textTyle} !important;
+    }
+}
+
+.flex-row-start {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
 }
 
 .flex-row-center {
@@ -19,7 +25,7 @@
     align-items: center;
     &>* {
         display: inline-block;
-        margin: 0 10px !important;
+        margin: 0 6px !important;
     }
 }
 
@@ -30,6 +36,6 @@
     align-content: center;
     &>* {
         display: inline-block;
-        margin: 0 10px !important;
+        margin: 0 6px !important;
     }
 }

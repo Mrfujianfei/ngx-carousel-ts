@@ -1,5 +1,5 @@
 <div id="calousel-box" [ngStyle]="{'width': calousel_width+'px', 'height': calousel_height+'px'}">
-  <div #calouselcontainer class="calousel-container flex-row-start-center">
+  <div #calouselcontainer class="calousel-container flex-row-start" [ngStyle]="{'align-items':itemAlign}">
     <div class="ng-carousel-item flex-row-center" *ngFor="let item of Images;let index = index">
       <img src="{{item}}">
     </div>
@@ -7,8 +7,6 @@
       <span class="pointer bt_index" *ngFor="let item of class_now_array" (click)="fn_selectChange(item)" [ngClass]="{'selected':(class_now_array.length<=4&&item===selectedIndex)||(class_now_array.length>4&&item===selectedIndex)}"></span>
     </div>
   </div>
-</div>
-<div class="flex-row-center-10">
-  <a class="pointer" (click)="fn_previous()">bef</a>
-  <a class="pointer" (click)="fn_next()">nex</a>
+  <a class="pointer" (click)="fn_previous()"><i class="iconfont icon-zuo"></i></a>
+  <a class="pointer" (click)="fn_next()"><i class="iconfont icon-you"></i></a>
 </div>
