@@ -14,4 +14,14 @@ export class AppComponent {
     'assets/天策5.jpg',
     'assets/天策6.jpg',
   ];
+
+  options = {
+    data: this.data,
+    width: 1200,
+    height: 300,
+    fmAlign: 'center',
+    showHandover: true,
+    handoverPosition: 'side',
+    showDottedMenu: true
+  };
 }

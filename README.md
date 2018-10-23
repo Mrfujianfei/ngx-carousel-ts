@@ -20,7 +20,7 @@
 
 - `import { NgxCarouselTsModule } from 'ngx-carousel-ts';`
 
-appmodule里面引入
+app.module里面引入
 
 - `imports: [ NgxCarouselTsModule ]`
 

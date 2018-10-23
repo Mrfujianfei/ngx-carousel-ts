@@ -1,12 +1,16 @@
-<div id="calousel-box" [ngStyle]="{'width': calousel_width+'px', 'height': calousel_height+'px'}">
-  <div #calouselcontainer class="calousel-container flex-row-start" [ngStyle]="{'align-items':itemAlign}">
-    <div class="ng-carousel-item flex-row-center" *ngFor="let item of Images;let index = index">
+<div id="calousel-box" [ngStyle]="{'width': _options.width+'px', 'height': _options.height+'px'}">
+  <div #calouselcontainer class="calousel-container flex-row-start" [ngStyle]="{'align-items':_options.fmAlign==='center'?'center':'flex-'+_options.fmAlign}">
+    <div class="ng-carousel-item flex-row-center" *ngFor="let item of _options.data;let index = index">
       <img src="{{item}}">
     </div>
-    <div class="bt_index_array flex-row-center-5">
+    <div class="bt_index_array flex-row-center-5" *ngIf="_options.showDottedMenu">
       <span class="pointer bt_index" *ngFor="let item of class_now_array" (click)="fn_selectChange(item)" [ngClass]="{'selected':(class_now_array.length<=4&&item===selectedIndex)||(class_now_array.length>4&&item===selectedIndex)}"></span>
     </div>
   </div>
-  <a class="pointer" (click)="fn_previous()"><i class="iconfont icon-zuo"></i></a>
-  <a class="pointer" (click)="fn_next()"><i class="iconfont icon-you"></i></a>
+  <a *ngIf="_options.showHandover" [ngClass]="{ 'side':_options.handoverPosition==='side' }" class="pointer" (click)="fn_previous()">
+    <i class="iconfont icon-zuo"></i>
+  </a>
+  <a *ngIf="_options.showHandover" [ngClass]="{ 'side':_options.handoverPosition==='side' }" class="pointer" (click)="fn_next()">
+    <i class="iconfont icon-you"></i>
+  </a>
 </div>

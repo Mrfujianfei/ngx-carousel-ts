@@ -12,6 +12,7 @@ import { AfterViewChecked } from '@angular/core';
 })
 export class NgxCarouselComponent implements OnInit, AfterViewInit {
   selectedIndex = 0;
+  ableClick = true;
   _listenClick = [];
   _setTimeout = null;
   calousel_width = 900; // 容器宽
@@ -22,37 +23,90 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
   item_doms_length = 0;
   class_now_array = [];
   class_before_array = [];
-  @Input() Images: any = [];
+  // _handoverposition = 'inner'; // side bottom
+  _showHandover = true;
 
+  _options = {
+    data: [], // 数据源
+    showHandover: true, // 是否显示左右切换按钮
+    handoverPosition: 'inner', // 左右切换按钮的位置  side:容器外  inner:容器内
+    width: 900, // 容器宽
+    height: 250, // 容器宽
+    fmAlign: 'center', // 图片对齐方式,
+    showDottedMenu: true,
+
+  };
   @Input()
-  set width(value: number) {
-    this.calousel_width = value;
-  }
-
-  get width() {
-    return this.calousel_width;
-  }
-
-  @Input()
-  set height(value: number) {
-    this.calousel_height = value;
-  }
-
-  get height() {
-    return this.calousel_height;
-  }
-
-
-  @Input()
-  set fmAlign(value: string) {
-    if (value === 'center' || value === 'end' || value === 'start') {
-      this.itemAlign = value === 'center' ? value : 'flex-' + value;
+  set options(value: object) {
+    if (value instanceof Object) {
+      this._options = Object.assign({
+        data: [], // 数据源
+        showHandover: true, // 是否显示左右切换按钮
+        handoverPosition: 'inner', // 左右切换按钮的位置  side:容器外  inner:容器内
+        width: 900, // 容器宽
+        height: 250, // 容器宽
+        fmAlign: 'center', // 图片对齐方式,
+        showDottedMenu: true, // 是否展示底部的munu
+      }, value);
     }
   }
 
-  get fmAlign() {
-    return this.itemAlign;
+  get options() {
+    return this._options;
   }
+
+  // @Input()
+  // set showHandover(value: boolean) {
+  //   this._showHandover = value;
+  // }
+
+  // get showHandover() {
+  //   return this._showHandover;
+  // }
+
+
+  // @Input()
+  // set handoverPosition(value: string) {
+  //   if (value) {
+  //     this._handoverposition = value;
+  //   }
+  // }
+
+  // get handoverPosition() {
+  //   return this._handoverposition;
+  // }
+
+  // @Input() Images: any = [];
+
+  // @Input()
+  // set width(value: number) {
+  //   this.calousel_width = value;
+  // }
+
+  // get width() {
+  //   return this.calousel_width;
+  // }
+
+  // @Input()
+  // set height(value: number) {
+  //   this.calousel_height = value;
+  // }
+
+  // get height() {
+  //   return this.calousel_height;
+  // }
+
+
+  // @Input()
+  // set fmAlign(value: string) {
+  //   if (value === 'center' || value === 'end' || value === 'start') {
+  //     this.itemAlign = value === 'center' ? value : 'flex-' + value;
+  //   }
+  // }
+
+  // get fmAlign() {
+  //   return this.itemAlign;
+  // }
 
   @ViewChild('calouselcontainer') _container: ElementRef;
   constructor(
@@ -64,7 +118,7 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    if (this.Images.length <= 4) {
+    if (this._options.data.length <= 4) {
       this.selectedIndex = 2;
     } else {
       this.selectedIndex = 3;
@@ -80,8 +134,7 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
   }
 
   fn_next() {
-    clearTimeout(this._setTimeout);
-    this._setTimeout = setTimeout(() => {
+    if (this.ableClick) {
       this.class_before_array = Object.assign([], this.class_now_array);
       const _shift = this.class_now_array.pop();
       this.class_now_array.unshift(_shift);
@@ -89,12 +142,16 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
       this.fn_domaddClass();
       this.fn_removelisten();
       this.fn_listenClick();
-    }, 500);
+      this.ableClick = false;
+      clearTimeout(this._setTimeout);
+      this._setTimeout = setTimeout(() => {
+        this.ableClick = true;
+      }, 500);
+    }
   }
 
   fn_previous() {
-    clearTimeout(this._setTimeout);
-    this._setTimeout = setTimeout(() => {
+    if (this.ableClick) {
       this.class_before_array = Object.assign([], this.class_now_array);
       const _shift = this.class_now_array.shift();
       this.class_now_array.push(_shift);
@@ -102,16 +159,20 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
       this.fn_domaddClass();
       this.fn_removelisten();
       this.fn_listenClick();
-    }, 500);
-
+      this.ableClick = false;
+      clearTimeout(this._setTimeout);
+      this._setTimeout = setTimeout(() => {
+        this.ableClick = true;
+      }, 500);
+    }
   }
 
   fn_domaddClass() {
     for (let i = 0; i < this.item_doms_length; i++) {
-      if (this.Images.length <= 4) {
+      if (this._options.data.length <= 4) {
         this.render.addClass(this.item_doms[i], 's' + this.class_now_array[i]);
       }
-      if (this.Images.length > 4) {
+      if (this._options.data.length > 4) {
         this.render.addClass(this.item_doms[i], 'p' + this.class_now_array[i]);
       }
 
@@ -120,10 +181,10 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
 
   fn_domRemoveClass() {
     for (let i = 0; i < this.item_doms_length; i++) {
-      if (this.Images.length <= 4) {
+      if (this._options.data.length <= 4) {
         this.render.removeClass(this.item_doms[i], 's' + this.class_before_array[i]);
       }
-      if (this.Images.length > 4) {
+      if (this._options.data.length > 4) {
         this.render.removeClass(this.item_doms[i], 'p' + this.class_before_array[i]);
       }
     }
@@ -132,12 +193,12 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
   fn_listenClick() {
     let _preview = null;
     let _next = null;
-    if (this.Images.length <= 4) {
+    if (this._options.data.length <= 4) {
       _preview = this.element.nativeElement.querySelectorAll('.s1');
       _next = this.element.nativeElement.querySelectorAll('.s3');
     }
 
-    if (this.Images.length > 4) {
+    if (this._options.data.length > 4) {
       _preview = this.element.nativeElement.querySelectorAll('.p2');
       _next = this.element.nativeElement.querySelectorAll('.p4');
     }
@@ -154,7 +215,7 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
   }
 
   fn_selectChange(index) {
-    if (this.Images.length <= 4) {
+    if (this._options.data.length <= 4) {
       this.class_before_array = Object.assign([], this.class_now_array);
       if (index - 2 < 0) {
         const _concat = this.class_now_array.splice(0, -(index - 2));

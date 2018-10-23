@@ -61,7 +61,7 @@ typings/
 .next
 
 _book
-
+doc
 dist
 
 ngCarouselModule
