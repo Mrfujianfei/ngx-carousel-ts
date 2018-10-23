@@ -24,10 +24,16 @@ app.module里面引入
 
 - `imports: [ NgxCarouselTsModule ]`
 
+html
+
+- `<ngx-carousel [options]="options"></ngx-carousel>`
+- `options={data:['图片路径1','图片路径2']}`
+
+
 - [使用文档](./doc/use/README.md)
 
 
-- [二次开发文档](./doc/dev/README.md)
+<!-- - [二次开发文档](./doc/dev/README.md) -->
 
 
 
