@@ -2,7 +2,7 @@
 
 ## 简介
 
-**ng-carousel** ———— 基于angular的图片轮播组件，使用简单，配置方便，提供多属性设置灵活性高。
+**ng-carousel** —— 基于angular的图片轮播组件，使用简单，配置方便，提供多属性设置灵活性高。
 
 + 官网：暂无
 + 文档：https://mrfujianfei.github.io/ngx-carousel-ts.github.io/
@@ -12,13 +12,11 @@
 
 ## 安装和下载
 
-npm安装：
+#### npm：
 
  `npm i ngx-carousel-ts`
 
 ## 快速使用
-
-#### npm：
 
 **1.步骤一**：引入NgxCarouselTsModule。
 
@@ -28,7 +26,7 @@ npm安装：
 
  `imports: [ NgxCarouselTsModule ]`
 
-**3.步骤三**：使用
+**3.步骤三**：使用。
 
 HTML如下：
 
@@ -56,7 +54,7 @@ export class AppComponent {
 
 - github：https://github.com/Mrfujianfei/ng-carousel/issues
 - QQ：1501324336
-- WeChat:fu1501324336
+- WeChat：fu1501324336
 
 ## 关于作者
 
