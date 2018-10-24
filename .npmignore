@@ -20,5 +20,6 @@ karma.conf.js
 .angular-cli.json
 angular.json
 SUMMARY.md
-
+_dist
+doc
 
