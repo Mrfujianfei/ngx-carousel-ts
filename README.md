@@ -46,6 +46,12 @@ export class AppComponent {
 
 *注：图片路径可以是相对路径，也可以是绝对路径*
 
+
+## 属性配置列表
+
+**使用文档**：https://mrfujianfei.github.io/ngx-carousel-ts.github.io/
+
+
 ## 交流 & 提问
 
 -github：https://github.com/Mrfujianfei/ng-carousel/issues
