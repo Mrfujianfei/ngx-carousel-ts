@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
-// import { NgxCarouselTsModule } from '../../projects/ngx-carousel-ts/src/public_api';
-  import { NgxCarouselTsModule } from 'ngx-carousel-ts';
+ import { NgxCarouselTsModule } from '../../projects/ngx-carousel-ts/src/public_api';
+//  import { NgxCarouselTsModule } from 'ngx-carousel-ts';
 
 @NgModule({
   declarations: [

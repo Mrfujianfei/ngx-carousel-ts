@@ -30,7 +30,7 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit, OnDestroy {
 
   _options = {
     data: [], // 数据源
-    type: 'cube', // 'cube'||'flat' 轮播类型
+    type: 'flat', // 'cube'||'flat' 轮播类型
     showHandover: true, // 是否显示左右切换按钮
     handoverPosition: 'inner', // 左右切换按钮的位置  side:容器外  inner:容器内
     width: 900, // 容器宽
