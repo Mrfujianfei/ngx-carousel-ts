@@ -32,7 +32,7 @@ HTML如下：
 
  `<ngx-carousel [options]="options"></ngx-carousel>`
 
-Typescipte如下：
+Typescript如下：
 
 ```
 export class AppComponent {
