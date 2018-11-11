@@ -1,4 +1,4 @@
-@import '../assets/icons/iconfont.css';
+@import '../index';
 #container {
     box-sizing: border-box;
     padding: 40px 80px;
@@ -57,7 +57,7 @@
         cursor: pointer;
         width: 56px;
         height: 56px;
-        color: rgba(107, 213, 225, .5);
+        color: rgba(107, 213, 225, .6);
         i {
             font-size: 50px;
         }
@@ -67,7 +67,7 @@
             border-top-left-radius: 50%;
             border-bottom-left-radius: 50%;
             &:hover {
-                color: rgba(107, 213, 225, .6);
+                color: rgba(107, 213, 225, .8);
                 background: linear-gradient(to right, rgba(0, 0, 0, .1), rgba(0, 0, 0, 0));
             }
         }
@@ -77,7 +77,7 @@
             border-top-right-radius: 50%;
             border-bottom-right-radius: 50%;
             &:hover {
-                color: rgba(107, 213, 225, .6);
+                color: rgba(107, 213, 225, .8);
                 background: linear-gradient(to left, rgba(0, 0, 0, .1), rgba(0, 0, 0, 0));
             }
             i {
