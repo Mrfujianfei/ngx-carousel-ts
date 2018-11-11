@@ -1,3 +1,4 @@
+@import '../assets/icons/iconfont.css';
 $textAlign-List:'center' 'left' 'right';
 @each $textTyle in $textAlign-List {
     .text-#{$textTyle} {

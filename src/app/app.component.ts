@@ -6,22 +6,33 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
-  data = [
-    'assets/天策2.jpg',
-    'assets/天策3.jpg',
-    'assets/天策4.jpg',
-    'assets/天策5.jpg',
-    'assets/天策6.jpg',
-  ];
+  // title = 'app';
+  // data = [
+  //   'assets/a1.jpeg',
+  //   'assets/a2.jpeg',
+  //   'assets/a3.jpeg',
+  //   'assets/a4.jpeg',
+  //   'assets/a5.jpeg',
+  //   'assets/a6.jpeg',
+  // ];
 
-  options = {
-    data: this.data,
-    width: 1200,
-    height: 300,
-    fmAlign: 'center',
-    showHandover: true,
-    handoverPosition: 'side',
-    showDottedMenu: true
-  };
+  // options = {
+  //   data: this.data,
+  //   type: 'cube',
+  //   width: 600,
+  //   height: 300,
+  //   fmAlign: 'center',
+  //   showHandover: true,
+  //   handoverPosition: 'side',
+  //   showDottedMenu: true,
+  //   autoplay: false, // 是否自动播放
+  //   interval: 4, // 自动播放间隔时间; 秒,
+  //   ifShadow: false,
+  //   dotteStyle: 'strip'
+  // };
+
+  // dosomething($event) {
+  //   console.log('yes');
+  //   console.log($event);
+  // }
 }

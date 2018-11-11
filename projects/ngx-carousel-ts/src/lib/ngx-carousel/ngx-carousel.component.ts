@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ElementRef, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { AfterViewInit } from '@angular/core';
 import { DoCheck } from '@angular/core';
 import { AfterContentInit } from '@angular/core';
@@ -10,44 +10,41 @@ import { AfterViewChecked } from '@angular/core';
   templateUrl: './ngx-carousel.component.html',
   styleUrls: ['./ngx-carousel.component.scss']
 })
-export class NgxCarouselComponent implements OnInit, AfterViewInit {
-  selectedIndex = 0;
-  ableClick = true;
-  _listenClick = [];
-  _setTimeout = null;
+export class NgxCarouselComponent implements OnInit, AfterViewInit, OnDestroy {
+  selectedIndex = 0; // 当前选中页
+  ableClick = true; // 能否点击下一页
+  _listenClick = []; // 监听事件
+  _setTimeout = null; // setTimeout接受
+  _setInterval = null; // setInterval接受
   calousel_width = 900; // 容器宽
   calousel_height = 250; // 容器高
   itemAlign = 'center'; // 'center' 'end' 'start'
-  item_doms = [];
+  item_doms = []; // 所有轮播元素数组
   item_doms_bt = [];
   item_doms_length = 0;
-  class_now_array = [];
-  class_before_array = [];
+  class_now_array = []; // 轮播当前状态序列号
+  class_before_array = []; // 轮播上一个状态序列号
+
   // _handoverposition = 'inner'; // side bottom
   _showHandover = true;
 
   _options = {
     data: [], // 数据源
+    type: 'cube', // 'cube'||'flat' 轮播类型
     showHandover: true, // 是否显示左右切换按钮
     handoverPosition: 'inner', // 左右切换按钮的位置  side:容器外  inner:容器内
     width: 900, // 容器宽
     height: 250, // 容器宽
     fmAlign: 'center', // 图片对齐方式,
-    showDottedMenu: true,
-
+    showDottedMenu: true, // 是否展示底部导航
+    autoplay: true, // 是否自动播放
+    interval: 2, // 自动播放间隔时间,
+    dotteStyle: 'strip' // 底部导航类型
   };
   @Input()
   set options(value: object) {
     if (value instanceof Object) {
-      this._options = Object.assign({
-        data: [], // 数据源
-        showHandover: true, // 是否显示左右切换按钮
-        handoverPosition: 'inner', // 左右切换按钮的位置  side:容器外  inner:容器内
-        width: 900, // 容器宽
-        height: 250, // 容器宽
-        fmAlign: 'center', // 图片对齐方式,
-        showDottedMenu: true, // 是否展示底部的munu
-      }, value);
+      this._options = Object.assign(this._options, value);
     }
   }
 
@@ -55,60 +52,7 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
     return this._options;
   }
 
-  // @Input()
-  // set showHandover(value: boolean) {
-  //   this._showHandover = value;
-  // }
-
-  // get showHandover() {
-  //   return this._showHandover;
-  // }
-
-
-  // @Input()
-  // set handoverPosition(value: string) {
-  //   if (value) {
-  //     this._handoverposition = value;
-  //   }
-  // }
-
-  // get handoverPosition() {
-  //   return this._handoverposition;
-  // }
-
-  // @Input() Images: any = [];
-
-  // @Input()
-  // set width(value: number) {
-  //   this.calousel_width = value;
-  // }
-
-  // get width() {
-  //   return this.calousel_width;
-  // }
-
-  // @Input()
-  // set height(value: number) {
-  //   this.calousel_height = value;
-  // }
-
-  // get height() {
-  //   return this.calousel_height;
-  // }
-
-
-  // @Input()
-  // set fmAlign(value: string) {
-  //   if (value === 'center' || value === 'end' || value === 'start') {
-  //     this.itemAlign = value === 'center' ? value : 'flex-' + value;
-  //   }
-  // }
-
-  // get fmAlign() {
-  //   return this.itemAlign;
-  // }
-
-  @ViewChild('calouselcontainer') _container: ElementRef;
+  @Output() clickHandle = new EventEmitter<{}>();
   constructor(
     private render: Renderer2,
     private element: ElementRef
@@ -117,24 +61,51 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
   }
+
+
   ngAfterViewInit(): void {
+    if (this._options.type === 'cube') {
+      return;
+    }
+
     if (this._options.data.length <= 4) {
       this.selectedIndex = 2;
     } else {
       this.selectedIndex = 3;
     }
+    // 获取所有轮播卡
     this.item_doms = this.element.nativeElement.querySelectorAll('.ng-carousel-item');
-    console.log(this.item_doms_bt);
     this.item_doms_length = this.item_doms.length;
     for (let i = 0; i < this.item_doms_length; i++) {
       this.class_now_array.push(i + 1);
     }
+
+    // 添加class
     this.fn_domaddClass();
+    // 添加监听事件
     this.fn_listenClick();
+
+    if (this._options.autoplay) {
+      this._setInterval = setInterval(() => {
+        this.fn_next();
+      }, 1000 * Number(this._options.interval));
+    }
+
+
   }
 
+  ngOnDestroy(): void {
+    // 清楚定时任务
+    clearTimeout(this._setTimeout);
+    clearInterval(this._setInterval);
+  }
+
+  // 轮播下一项
   fn_next() {
     if (this.ableClick) {
+      if (this._setInterval) {
+        clearInterval(this._setInterval);
+      }
       this.class_before_array = Object.assign([], this.class_now_array);
       const _shift = this.class_now_array.pop();
       this.class_now_array.unshift(_shift);
@@ -146,10 +117,16 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
       clearTimeout(this._setTimeout);
       this._setTimeout = setTimeout(() => {
         this.ableClick = true;
+        if (this._options.autoplay) {
+          this._setInterval = setInterval(() => {
+            this.fn_next();
+          }, 1000 * Number(this._options.interval));
+        }
       }, 500);
     }
   }
 
+  // 轮播上一项
   fn_previous() {
     if (this.ableClick) {
       this.class_before_array = Object.assign([], this.class_now_array);
@@ -167,9 +144,11 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // 轮播卡添加class
   fn_domaddClass() {
     for (let i = 0; i < this.item_doms_length; i++) {
       if (this._options.data.length <= 4) {
+        // 判断轮播卡小于4项的时候另外处理
         this.render.addClass(this.item_doms[i], 's' + this.class_now_array[i]);
       }
       if (this._options.data.length > 4) {
@@ -179,6 +158,8 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
     }
   }
 
+
+  // 轮播卡移除class
   fn_domRemoveClass() {
     for (let i = 0; i < this.item_doms_length; i++) {
       if (this._options.data.length <= 4) {
@@ -190,22 +171,40 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // 动态给轮播卡设置监听事件
   fn_listenClick() {
     let _preview = null;
     let _next = null;
+    let _center = null;
     if (this._options.data.length <= 4) {
       _preview = this.element.nativeElement.querySelectorAll('.s1');
+      _center = this.element.nativeElement.querySelectorAll('.s2');
       _next = this.element.nativeElement.querySelectorAll('.s3');
     }
 
     if (this._options.data.length > 4) {
       _preview = this.element.nativeElement.querySelectorAll('.p2');
+      _center = this.element.nativeElement.querySelectorAll('.p3');
       _next = this.element.nativeElement.querySelectorAll('.p4');
     }
-    this._listenClick[0] = this.render.listen(_preview[0], 'click', this.fn_previous.bind(this));
-    this._listenClick[1] = this.render.listen(_next[0], 'click', this.fn_next.bind(this));
+    if (_preview && _preview[0]) {
+      this._listenClick[0] = this.render.listen(_preview[0], 'click', this.fn_previous.bind(this));
+    }
+
+    if (_next && _next[0]) {
+      this._listenClick[1] = this.render.listen(_next[0], 'click', this.fn_next.bind(this));
+    }
+
+
+    if (_center && _center[0]) {
+      this._listenClick[2] = this.render.listen(_center[0], 'click', () => {
+        this.clickHandle.emit(this.selectedIndex);
+      });
+    }
+
   }
 
+  // 移除监听事件
   fn_removelisten() {
     for (const entry of this._listenClick) {
       if (entry) {
@@ -214,6 +213,7 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // selectIndex改变（底部导航改变）
   fn_selectChange(index) {
     if (this._options.data.length <= 4) {
       this.class_before_array = Object.assign([], this.class_now_array);

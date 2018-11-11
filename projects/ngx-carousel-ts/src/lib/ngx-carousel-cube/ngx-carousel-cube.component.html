@@ -1,0 +1,35 @@
+<div id="container" [ngStyle]="{'width': _options.width+'px', 'height': _options.height+'px' }">
+
+  <!-- <div class="box relative" *ngFor="let item of [1,2,3,4,5]">
+    
+  </div> -->
+  <!-- *ngFor="let item of [1,2,3,4,5]" -->
+  <div class="cube" *ngFor="let item of [1,2,3,4,5]" [ngStyle]="{'transform':'rotateX('+rotateDegree+'deg)' }">
+    <div class="face face_front" [ngStyle]="_styleObject.faceFront" (click)="fn_clickOutPut()">
+      <img src="{{faceState[0].imgurl}}">
+    </div>
+    <div class="face face_top" [ngStyle]="_styleObject.faceTop" (click)="fn_clickOutPut()">
+      <img src="{{faceState[3].imgurl}}">
+    </div>
+    <div class="face face_back" [ngStyle]="_styleObject.faceBack" (click)="fn_clickOutPut()">
+      <img src="{{faceState[2].imgurl}}">
+    </div>
+    <div class=" face face_bottom " [ngStyle]="_styleObject.faceBottom" (click)="fn_clickOutPut()">
+      <img src="{{faceState[1].imgurl}}">
+    </div>
+    <div class=" face face_left " [ngStyle]="_styleObject.faceLeft" (click)="fn_clickOutPut()">
+    </div>
+    <div class=" face face_right " [ngStyle]="_styleObject.faceRight" (click)="fn_clickOutPut()">
+    </div>
+  </div>
+  <a (click)="fn_rotatePreview()">
+    <i class="iconfont icon-zuo"></i>
+  </a>
+  <a (click)="fn_rotateNext()">
+    <i class="iconfont icon-you"></i>
+  </a>
+  <div *ngIf="_options.showDottedMenu" class="flex-row-center-5 bottom_menu" [ngClass]="{'circleStyle':_options.dotteStyle === 'circle','stripStyle':_options.dotteStyle !== 'circle'}">
+    <span *ngFor="let item of imgs_queue;let index = index" [ngClass]="{'select':index ===nextIndex}" (click)="fn_linkToFace(index)"></span>
+  </div>
+  <div *ngIf="_options.ifShadow" class="bottomShadow"></div>
+</div>

@@ -1,10 +1,10 @@
-<div id="calousel-box" [ngStyle]="{'width': _options.width+'px', 'height': _options.height+'px'}">
-  <div #calouselcontainer class="calousel-container flex-row-start" [ngStyle]="{'align-items':_options.fmAlign==='center'?'center':'flex-'+_options.fmAlign}">
+<div *ngIf="_options.type==='flat'" id="calousel-box" [ngStyle]="{'width': _options.width+'px', 'height': _options.height+'px'}">
+  <div class="calousel-container flex-row-start" [ngStyle]="{'align-items':_options.fmAlign==='center'?'center':'flex-'+_options.fmAlign}">
     <div class="ng-carousel-item flex-row-center" *ngFor="let item of _options.data;let index = index">
       <img src="{{item}}">
     </div>
-    <div class="bt_index_array flex-row-center-5" *ngIf="_options.showDottedMenu">
-      <span class="pointer bt_index" *ngFor="let item of class_now_array" (click)="fn_selectChange(item)" [ngClass]="{'selected':(class_now_array.length<=4&&item===selectedIndex)||(class_now_array.length>4&&item===selectedIndex)}"></span>
+    <div class="bt_index_array flex-row-center-5" *ngIf="_options.showDottedMenu" [ngClass]="{'circleStyle':_options.dotteStyle === 'circle','stripStyle':_options.dotteStyle !== 'circle'}">
+      <span class="pointer bt_index" *ngFor="let item of class_now_array" (click)="fn_selectChange(item)" [ngClass]="{'select':(class_now_array.length<=4&&item===selectedIndex)||(class_now_array.length>4&&item===selectedIndex)}"></span>
     </div>
   </div>
   <a *ngIf="_options.showHandover" [ngClass]="{ 'side':_options.handoverPosition==='side' }" class="pointer" (click)="fn_previous()">
@@ -14,3 +14,5 @@
     <i class="iconfont icon-you"></i>
   </a>
 </div>
+
+<ngx-carousel-cube *ngIf="_options.type==='cube'" [options]="_options" (clickHandle)="clickHandle.emit($event);"></ngx-carousel-cube>

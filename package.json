@@ -1,6 +1,6 @@
 {
   "name": "ng6-carousel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,8 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    // "package": "rollup -c", //发布的时候要把注释去掉
-    // "prepublish": "tsc",
+    "package": "rollup -c", 
+    "prepublish": "tsc",
     "npm:publish": "npm publish"
   },
   "keywords": [
