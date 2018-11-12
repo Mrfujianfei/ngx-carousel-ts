@@ -19,8 +19,8 @@ export class AppComponent {
   options = {
     data: this.data,
     type: 'cube',
-    width: 600,
-    height: 300,
+    width: 700,
+    height: 350,
     fmAlign: 'center',
     showHandover: true,
     handoverPosition: 'side',
@@ -28,7 +28,6 @@ export class AppComponent {
     autoplay: false, // 是否自动播放
     interval: 4, // 自动播放间隔时间; 秒,
     ifShadow: true,
-    dotteStyle: 'circle'
   };
 
   dosomething($event) {

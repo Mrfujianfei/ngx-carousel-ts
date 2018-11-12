@@ -129,6 +129,9 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit, OnDestroy {
   // 轮播上一项
   fn_previous() {
     if (this.ableClick) {
+      if (this._setInterval) {
+        clearInterval(this._setInterval);
+      }
       this.class_before_array = Object.assign([], this.class_now_array);
       const _shift = this.class_now_array.shift();
       this.class_now_array.push(_shift);
@@ -140,6 +143,11 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit, OnDestroy {
       clearTimeout(this._setTimeout);
       this._setTimeout = setTimeout(() => {
         this.ableClick = true;
+        if (this._options.autoplay) {
+          this._setInterval = setInterval(() => {
+            this.fn_next();
+          }, 1000 * Number(this._options.interval));
+        }
       }, 500);
     }
   }
@@ -215,6 +223,10 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // selectIndex改变（底部导航改变）
   fn_selectChange(index) {
+    // 清楚自动播放
+    if (this._setInterval) {
+      clearInterval(this._setInterval);
+    }
     if (this._options.data.length <= 4) {
       this.class_before_array = Object.assign([], this.class_now_array);
       if (index - 2 < 0) {
@@ -244,9 +256,16 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(this.class_now_array);
       }
     }
+
     this.fn_domRemoveClass();
     this.fn_domaddClass();
     this.fn_removelisten();
     this.fn_listenClick();
+    // 添加自动播放
+    if (this._options.autoplay) {
+      this._setInterval = setInterval(() => {
+        this.fn_next();
+      }, 1000 * Number(this._options.interval));
+    }
   }
 }

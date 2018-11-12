@@ -91,6 +91,7 @@
         height: 100%;
         position: relative;
         transform-style: preserve-3d;
+        margin:0 -1px;
         .face {
             height: 100%;
             width: 100%;
@@ -102,6 +103,7 @@
                 height: 100%;
             }
         }
+        
         .face_left,
         .face_right {
             box-shadow: 0px 0px 300px rgba(0, 0, 0, 1) inset;
