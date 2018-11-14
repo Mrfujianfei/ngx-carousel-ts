@@ -10,11 +10,18 @@
 
 *目前还在开发持续开发中*
 
+## Demo
+
+![avatar](assets/flat.gif)
+
+![avatar](assets/cube.gif)
+
 ## 安装和下载
 
 #### npm：
 
  `npm i ngx-carousel-ts`
+
 
 ## 快速使用
 
