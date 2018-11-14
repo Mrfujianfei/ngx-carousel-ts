@@ -12,9 +12,9 @@
 
 ## Demo
 
-![avatar](assets/flat.gif)
+![avatar](./src/assets/flat.gif)
 
-![avatar](assets/cube.gif)
+![avatar](./src/assets/cube.gif)
 
 ## 安装和下载
 
