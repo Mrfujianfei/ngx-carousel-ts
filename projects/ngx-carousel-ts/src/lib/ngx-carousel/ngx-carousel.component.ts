@@ -232,12 +232,10 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit, OnDestroy {
       if (index - 2 < 0) {
         const _concat = this.class_now_array.splice(0, -(index - 2));
         this.class_now_array = this.class_now_array.concat(_concat);
-        console.log(this.class_now_array);
       }
       if (index - 2 > 0) {
         const _concat = this.class_now_array.splice(this.item_doms_length - (index - 2), index - 2);
         this.class_now_array = _concat.concat(this.class_now_array);
-        console.log(this.class_now_array);
       }
       this.fn_domRemoveClass();
       this.fn_domaddClass();
@@ -248,12 +246,10 @@ export class NgxCarouselComponent implements OnInit, AfterViewInit, OnDestroy {
       if (index - 3 < 0) {
         const _concat = this.class_now_array.splice(0, -(index - 3));
         this.class_now_array = this.class_now_array.concat(_concat);
-        console.log(this.class_now_array);
       }
       if (index - 3 > 0) {
         const _concat = this.class_now_array.splice(this.item_doms_length - (index - 3), index - 3);
         this.class_now_array = _concat.concat(this.class_now_array);
-        console.log(this.class_now_array);
       }
     }
 

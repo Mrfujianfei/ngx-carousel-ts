@@ -4,9 +4,9 @@
 
 **ngx-carousel-ts** —— 基于angular的图片轮播组件，小巧轻便，使用简单，配置方便，提供多属性设置灵活性高。
 
-+ 官网：https://mrfujianfei.github.io/ngx-carousel-ts.github.io/
-+ 文档：https://mrfujianfei.github.io/ngx-carousel-ts.github.io/doc/use/
-+ 源码：https://github.com/Mrfujianfei/ngx-carousel-ts
++ [官网](https://mrfujianfei.github.io/ngx-carousel-ts.github.io/)
++ [文档](https://mrfujianfei.github.io/ngx-carousel-ts.github.io/doc/use/)
++ [源码](https://github.com/Mrfujianfei/ngx-carousel-ts)
 
 *目前还在开发持续开发中*
 

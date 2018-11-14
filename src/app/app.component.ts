@@ -31,7 +31,5 @@ export class AppComponent {
   };
 
   dosomething($event) {
-    console.log('yes');
-    console.log($event);
   }
 }

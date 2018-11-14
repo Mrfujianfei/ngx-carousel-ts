@@ -128,8 +128,6 @@ export class NgxCarouselCubeComponent implements OnInit, OnDestroy {
 
   // 旋转-90
   fn_rotateNext(nextIndex?) {
-    console.log('before');
-    console.log(this.faceState);
     if (!this.ableClick) {
       return;
     }
@@ -157,13 +155,10 @@ export class NgxCarouselCubeComponent implements OnInit, OnDestroy {
     this.ableClick = false;
     this.rotateDegree -= 90;
     this.fn_ableClick();
-    console.log('介绍之后我来看看结果');
-    console.log(this.selectIndex);
   }
 
   // 旋转90;
   fn_rotatePreview(nextIndex?) {
-    console.log(this.imgs_queue);
     if (!this.ableClick) {
       return;
     }
@@ -190,8 +185,6 @@ export class NgxCarouselCubeComponent implements OnInit, OnDestroy {
     this.ableClick = false;
     this.rotateDegree += 90;
     this.fn_ableClick();
-    console.log('介绍之后我来看看结果');
-    console.log(this.selectIndex);
   }
 
   // 改变按钮的可点击状态并清空计时器，重新设置自动播放
@@ -237,8 +230,6 @@ export class NgxCarouselCubeComponent implements OnInit, OnDestroy {
 
   // 底部菜单导航
   fn_linkToFace(index) {
-    console.log(index);
-    console.log(this.selectIndex);
     if (index >= this.nextIndex || (this.nextIndex === (this.imgs_queue.length - 1) && index === 0)) {
       this.fn_rotateNext(index);
     } else {
