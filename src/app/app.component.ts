@@ -18,9 +18,9 @@ export class AppComponent {
 
   options = {
     data: this.data,
-    type: 'cube',
-    width: 700,
-    height: 350,
+    type: 'flat',
+    width: 900,
+    height: 250,
     fmAlign: 'center',
     showHandover: true,
     handoverPosition: 'side',
